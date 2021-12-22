@@ -4,109 +4,54 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 941d1f80-6213-11ec-0be9-1bc528c3548a
+# ╔═╡ 7ef17540-ffdf-4081-8dc6-e20a7e387852
 begin
 	using Images
-	dog = load("ImgData\\test_dog_img.jpg")
 end
 
-# ╔═╡ 32789fcf-920c-43d2-b9f6-e824fbf60a08
-using PlutoUI
-
-# ╔═╡ 1b0db34d-1ac8-499f-931d-6b0b7766df32
-cat = load("ImgData\\test_cat_img.jpg")
-
-# ╔═╡ eaeaa633-431a-4cd4-9d39-b7fa1d181890
-typeof(cat)
-
-# ╔═╡ 655d29d0-dbb0-4a3c-acbb-2adbbc015dfb
-RGBX(0.6, 0.6, 0.8)
-
-# ╔═╡ ae4de47a-5288-4717-82ed-9ea6f3e6c2e9
-size(dog)[2]
-
-# ╔═╡ 71d12397-40bb-44a0-b710-f18b6b63041e
-h = size(dog)[1]
-
-# ╔═╡ 2e96c9f2-3a92-4db5-984e-a2fb7e8829b1
-w = size(dog)[2]
-
-# ╔═╡ 45c3e043-5748-4102-a6de-84464ce0ab7f
-begin
-	# (h, w) = size(dog)
-	head = dog[(h÷3) : h, (w÷4) : (w-100)]
-end
-
-# ╔═╡ 237cb337-e9d5-462a-a646-d755dcd98348
-size(head)
-
-# ╔═╡ a788d581-0bc2-445e-8184-3ca720e036f9
-[
-	reverse(head, dims=2)					 head
-	reverse(reverse(head, dims=2), dims=1)	 reverse(head, dims=1)
-]
-
-# ╔═╡ 283cdc4f-a1d0-4904-b31b-0946f434ee6a
-purple = RGBX(0.6, 0.6, 0.8)
-
-# ╔═╡ 93d486bf-6181-42ce-8cbd-de94af9b5621
-copy_dog = copy(head)
-
-# ╔═╡ 05000e38-13b4-4860-99fc-2b8d88e4cfc2
-for i in 1:100
-	for j in 1:200
-		copy_dog[i, j] = purple
-	end
-end
-
-# ╔═╡ 8e408574-0442-44d2-8f26-11f6ea7c706b
-copy_dog
-
-# ╔═╡ 8f414f7a-6ab9-400b-bfde-c51b377ef22c
-c = RGB(1, 0, 0)
-
-# ╔═╡ 489e5707-c1cd-4c52-b8d4-203a092d0465
-function rfy(color)
-	return RGB(color.r, 0, 0)
-end
-
-# ╔═╡ 525f0add-548f-4a9d-86f8-dcd59bcd10fe
-function gfy(color)
-	return RGB(0, color.g, 0)
-end
-
-# ╔═╡ 383d2e19-190e-412b-806c-5ac0835719df
-function bfy(color)
-	return RGB(0, 0, color.b)
-end
-
-# ╔═╡ 7cb16cd7-ca4b-4aa4-b41d-5853cbdde72b
-function rgbfy(color)
-	return RGB(color.r - 0.3, color.g - 0.3, color.b - 0.2)
-end
-
-# ╔═╡ 5414c8a2-74b5-42f1-9698-7d3a23f78fb0
-begin
-	color = RGB(0.9, 0.4, 0.1)
-	[color, rfy(color), purple, rfy(purple)]
-	
-end
-
-# ╔═╡ bc7df94a-0f2d-4451-8479-8a779bb0da9a
+# ╔═╡ 99e93664-f611-4aa0-859e-e988f1a78c98
 decimate(image, ratio=5) = image[1:ratio:end, 1:ratio:end]
 
-# ╔═╡ eb7fb23c-3175-4229-b4ae-a7fc35c94f5d
-poor_dog = decimate(head, 3)
+# ╔═╡ 61a2d442-9fe6-46a4-a9d1-12f93aa934e9
+keeptrack = [ typeof(1), typeof(1.), typeof("one"), typeof(1//1), typeof([1 2; 3 4])]
+
+# ╔═╡ b6f36598-5957-4162-bab5-ee0029e766ad
+typeof(keeptrack)
+
+# ╔═╡ 4593b729-eac8-450f-b4a4-c5b42978630a
+one_img = decimate(load(download("https://play-lh.googleusercontent.com/DGAleS46qOedNzJGsB3e29QLpL6Qi6EwIDze95nBvxMAMGEmbE6KOW__2haEkHVDs4Y")))
+
+# ╔═╡ aaaa18b0-62f0-11ec-1765-dfb3bbd0e393
+el = one_img
+
+# ╔═╡ 35ff15e0-497e-46fa-a33a-1003c8c9a4f8
+fill( el, 3, 4)
+
+# ╔═╡ ccbd7d82-9990-4d2f-9890-7ebb65a39cf2
+typeof(el)
+
+# ╔═╡ 47b2efdf-135e-462e-b81c-93559c00f435
+colors = distinguishable_colors(10)
+
+# ╔═╡ 0e3df497-3521-47ed-a60b-5830d4c4be3b
+A = rand(colors, 10, 10)
+
+# ╔═╡ b95fd5cc-72e0-47ab-a66d-4f2e63a0eb02
+D = [i*j for i=1:5, j=1:5]
+
+# ╔═╡ e59818cc-8ed1-463e-a6a4-229ec558b18d
+D.^2
+
+# ╔═╡ 763d51d7-5f70-4285-92bf-35c6135deb53
+D^2
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
-PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 Images = "~0.25.0"
-PlutoUI = "~0.7.25"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -121,12 +66,6 @@ deps = ["LinearAlgebra"]
 git-tree-sha1 = "485ee0867925449198280d4af84bdb46a2a404d0"
 uuid = "621f4979-c628-5d54-868e-fcf4e3e8185c"
 version = "1.0.1"
-
-[[deps.AbstractPlutoDingetjes]]
-deps = ["Pkg"]
-git-tree-sha1 = "37b730f25b5662ac452f7bb2c50a0567cbb748d4"
-uuid = "6e696c72-6542-2067-7265-42206c756150"
-version = "1.1.3"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra"]
@@ -339,23 +278,6 @@ git-tree-sha1 = "92243c07e786ea3458532e199eb3feee0e7e08eb"
 uuid = "86223c79-3864-5bf0-83f7-82e725a168b6"
 version = "1.4.1"
 
-[[deps.Hyperscript]]
-deps = ["Test"]
-git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
-uuid = "47d2ed2b-36de-50cf-bf87-49c2cf4b8b91"
-version = "0.0.4"
-
-[[deps.HypertextLiteral]]
-git-tree-sha1 = "2b078b5a615c6c0396c77810d92ee8c6f470d238"
-uuid = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
-version = "0.9.3"
-
-[[deps.IOCapture]]
-deps = ["Logging", "Random"]
-git-tree-sha1 = "f7be53659ab06ddc986428d3a9dcc95f6fa6705a"
-uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
-version = "0.2.2"
-
 [[deps.IfElse]]
 git-tree-sha1 = "debdd00ffef04665ccbb3e150747a77560e8fad1"
 uuid = "615f187c-cbe4-4ef1-ba3b-2fcf58d6d173"
@@ -529,12 +451,6 @@ git-tree-sha1 = "642a199af8b68253517b80bd3bfd17eb4e84df6e"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
 version = "1.3.0"
 
-[[deps.JSON]]
-deps = ["Dates", "Mmap", "Parsers", "Unicode"]
-git-tree-sha1 = "8076680b162ada2a031f707ac7b4953e30667a37"
-uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "0.21.2"
-
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "d735490ac75c5cb9f1b00d8b5509c11984dc6943"
@@ -707,12 +623,6 @@ git-tree-sha1 = "34c0e9ad262e5f7fc75b10a9952ca7692cfc5fbe"
 uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
 version = "0.12.3"
 
-[[deps.Parsers]]
-deps = ["Dates"]
-git-tree-sha1 = "d7fa6237da8004be601e19bd6666083056649918"
-uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.1.3"
-
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
@@ -722,12 +632,6 @@ deps = ["Pkg"]
 git-tree-sha1 = "a7a7e1a88853564e551e4eba8650f8c38df79b37"
 uuid = "eebad327-c553-4316-9ea0-9fa01ccd7688"
 version = "0.1.1"
-
-[[deps.PlutoUI]]
-deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
-git-tree-sha1 = "93cf0910f09a9607add290a3a2585aa376b4feb6"
-uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.25"
 
 [[deps.Preferences]]
 deps = ["TOML"]
@@ -951,28 +855,18 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╠═941d1f80-6213-11ec-0be9-1bc528c3548a
-# ╠═1b0db34d-1ac8-499f-931d-6b0b7766df32
-# ╠═eaeaa633-431a-4cd4-9d39-b7fa1d181890
-# ╠═655d29d0-dbb0-4a3c-acbb-2adbbc015dfb
-# ╠═ae4de47a-5288-4717-82ed-9ea6f3e6c2e9
-# ╠═71d12397-40bb-44a0-b710-f18b6b63041e
-# ╠═2e96c9f2-3a92-4db5-984e-a2fb7e8829b1
-# ╠═45c3e043-5748-4102-a6de-84464ce0ab7f
-# ╠═237cb337-e9d5-462a-a646-d755dcd98348
-# ╠═a788d581-0bc2-445e-8184-3ca720e036f9
-# ╠═283cdc4f-a1d0-4904-b31b-0946f434ee6a
-# ╠═93d486bf-6181-42ce-8cbd-de94af9b5621
-# ╠═05000e38-13b4-4860-99fc-2b8d88e4cfc2
-# ╠═8e408574-0442-44d2-8f26-11f6ea7c706b
-# ╠═8f414f7a-6ab9-400b-bfde-c51b377ef22c
-# ╠═489e5707-c1cd-4c52-b8d4-203a092d0465
-# ╠═525f0add-548f-4a9d-86f8-dcd59bcd10fe
-# ╠═383d2e19-190e-412b-806c-5ac0835719df
-# ╠═7cb16cd7-ca4b-4aa4-b41d-5853cbdde72b
-# ╠═5414c8a2-74b5-42f1-9698-7d3a23f78fb0
-# ╠═bc7df94a-0f2d-4451-8479-8a779bb0da9a
-# ╠═eb7fb23c-3175-4229-b4ae-a7fc35c94f5d
-# ╠═32789fcf-920c-43d2-b9f6-e824fbf60a08
+# ╠═7ef17540-ffdf-4081-8dc6-e20a7e387852
+# ╠═99e93664-f611-4aa0-859e-e988f1a78c98
+# ╠═aaaa18b0-62f0-11ec-1765-dfb3bbd0e393
+# ╠═35ff15e0-497e-46fa-a33a-1003c8c9a4f8
+# ╠═ccbd7d82-9990-4d2f-9890-7ebb65a39cf2
+# ╠═61a2d442-9fe6-46a4-a9d1-12f93aa934e9
+# ╠═b6f36598-5957-4162-bab5-ee0029e766ad
+# ╠═4593b729-eac8-450f-b4a4-c5b42978630a
+# ╠═47b2efdf-135e-462e-b81c-93559c00f435
+# ╠═0e3df497-3521-47ed-a60b-5830d4c4be3b
+# ╠═b95fd5cc-72e0-47ab-a66d-4f2e63a0eb02
+# ╠═e59818cc-8ed1-463e-a6a4-229ec558b18d
+# ╠═763d51d7-5f70-4285-92bf-35c6135deb53
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
