@@ -139,13 +139,19 @@ md"""
 
 
 # ╔═╡ 0bd4ae80-62f5-11ec-2d1f-7d917a6cd4b5
-dog = decimate(load("ImgData\\test_dog_img.jpg"), 3)
+dog = shrink_image(load("ImgData\\test_dog_img.jpg"), 1)
 
 # ╔═╡ e0d33058-4b12-4295-83de-2378316cd58f
 size(dog)
 
+# ╔═╡ b8d7f133-af6c-4ead-a7da-d8375eb5cbd8
+
+
+# ╔═╡ 56eda922-59a6-4eff-b9d3-0f4455ece2e1
+
+
 # ╔═╡ 6ec4f175-0cca-4ced-b7fa-47844f8cf88c
-kernel = Kernel.gaussian((3, 3))
+kernel = Kernel.gaussian((3,3))
 
 # ╔═╡ 845047dd-b7bc-4737-ab3a-1d7bc942c298
 show_colored_kernel(kernel)
@@ -157,7 +163,7 @@ sum(kernel)
 convolve(dog, kernel)
 
 # ╔═╡ a1b83be2-f69f-48d8-a453-5bb4531a9c35
-kernel1 = Kernel.sobel()[1]
+kernel1 = Kernel.sobel()[2]
 
 # ╔═╡ 3427e695-e480-48c5-9387-bfd231541e73
 show_colored_kernel(kernel1)
@@ -166,16 +172,25 @@ show_colored_kernel(kernel1)
 sum(kernel1)
 
 # ╔═╡ a012c014-71e5-4f2e-a147-5f207a2e0ec9
-convolve(dog, kernel1)
+black_w = 5 * Gray.(abs.(convolve(dog, kernel1)))
+
+# ╔═╡ 9a5fa611-fa39-4579-82a1-dac02113e591
+dog
+
+# ╔═╡ c0c48c36-522d-4cf4-877f-59ffcd44f948
+plot_1d_fourier_spectrum(dog)
 
 # ╔═╡ b59c0c16-7ce0-4d52-8d07-2a4369680c1b
-
+conv_image = convolve(dog, kernel)
 
 # ╔═╡ 360b9596-95c9-4668-b5f8-748de0c478c1
-
+plot_1d_fourier_spectrum(conv_image)
 
 # ╔═╡ 156eb990-72ce-4d17-b7f5-f41f5abe4aad
+heatmap_2d_fourier_spectrum(dog)
 
+# ╔═╡ e93a3b9f-9cae-4097-870b-2c417f8c4d82
+heatmap_2d_fourier_spectrum(conv_image)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1617,9 +1632,9 @@ version = "0.9.1+5"
 # ╟─c7c2580c-7d2a-45bf-8df6-96122c940f48
 # ╟─ad04040d-37f8-47bd-98d4-0c5f8a7295d1
 # ╟─788b4671-5596-4958-9bcd-f9f70735d122
-# ╟─576de5c8-e282-48e5-96e1-d723fbae5a1c
+# ╠═576de5c8-e282-48e5-96e1-d723fbae5a1c
 # ╟─a903ad96-59f4-4cce-aa61-25f6815be9de
-# ╟─22ebc273-0a2f-4d01-a99c-8d8abdf512b6
+# ╠═22ebc273-0a2f-4d01-a99c-8d8abdf512b6
 # ╠═a987f5bd-75a8-46dd-bbf2-78cda93b72ff
 # ╠═ef4400ab-1775-4a26-83c0-262ee9e81790
 # ╠═745c3550-fe8c-4429-a46d-4c984974db22
@@ -1628,6 +1643,8 @@ version = "0.9.1+5"
 # ╠═b97dba72-4be3-4620-b2fa-53e63368702d
 # ╠═0bd4ae80-62f5-11ec-2d1f-7d917a6cd4b5
 # ╠═e0d33058-4b12-4295-83de-2378316cd58f
+# ╠═b8d7f133-af6c-4ead-a7da-d8375eb5cbd8
+# ╠═56eda922-59a6-4eff-b9d3-0f4455ece2e1
 # ╠═6ec4f175-0cca-4ced-b7fa-47844f8cf88c
 # ╠═845047dd-b7bc-4737-ab3a-1d7bc942c298
 # ╠═ad383fb2-f949-46de-a47e-f748ad543b78
@@ -1636,8 +1653,11 @@ version = "0.9.1+5"
 # ╠═3427e695-e480-48c5-9387-bfd231541e73
 # ╠═5d4b309e-7031-470c-9345-21e6fdf3e40e
 # ╠═a012c014-71e5-4f2e-a147-5f207a2e0ec9
+# ╠═9a5fa611-fa39-4579-82a1-dac02113e591
+# ╠═c0c48c36-522d-4cf4-877f-59ffcd44f948
 # ╠═b59c0c16-7ce0-4d52-8d07-2a4369680c1b
 # ╠═360b9596-95c9-4668-b5f8-748de0c478c1
 # ╠═156eb990-72ce-4d17-b7f5-f41f5abe4aad
+# ╠═e93a3b9f-9cae-4097-870b-2c417f8c4d82
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
